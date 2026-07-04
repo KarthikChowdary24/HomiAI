@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Room - HomiAI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* Loading Screen */
+
+        #loadingScreen{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:#0f172a;
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+            flex-direction:column;
+            color:white;
+        }
+
+        .loader-box{
+            text-align:center;
+            width:420px;
+        }
+
+        .loader-box h1{
+            margin-bottom:25px;
+            color:#38bdf8;
+        }
+
+        .step{
+            text-align:left;
+            margin:18px 0;
+            font-size:18px;
+            opacity:.45;
+            transition:.4s;
+        }
+
+        .step.active{
+            opacity:1;
+            color:#38bdf8;
+            transform:translateX(8px);
+        }
+
+        .progress{
+            width:100%;
+            height:12px;
+            background:#334155;
+            border-radius:30px;
+            margin-top:30px;
+            overflow:hidden;
+        }
+
+        .progress-bar{
+            width:0%;
+            height:100%;
+            background:#38bdf8;
+            transition:width .5s;
+        }
+
+        .loading-text{
+            margin-top:20px;
+            color:#94a3b8;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="loadingScreen">
+
+    <div class="loader-box">
+
+        <h1>🏠 HomiAI</h1>
+
+        <div id="step1" class="step">
+            🧠 Analyzing your room...
+        </div>
+
+        <div id="step2" class="step">
+            🛋 Detecting furniture...
+        </div>
+
+        <div id="step3" class="step">
+            🎨 Finding perfect design style...
+        </div>
+
+        <div id="step4" class="step">
+            💡 Optimizing lighting...
+        </div>
+
+        <div id="step5" class="step">
+            🤖 Preparing AI Report...
+        </div>
+
+        <div class="progress">
+
+            <div class="progress-bar" id="progressBar"></div>
+
+        </div>
+
+        <div class="loading-text">
+
+            Please wait while our AI designs your room...
+
+        </div>
+
+    </div>
+
+</div>
+
+<nav>
+    <div class="logo">🏠 HomiAI</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+    </div>
+</nav>
+<div class="upload-container">
+    <h1>Upload Your Room</h1>
+    <p>
+        Upload a room image and let HomiAI generate
+        personalized interior design suggestions.
+    </p>
+
+    <form
+        id="uploadForm"
+        action="/upload-image"
+        method="POST"
+        enctype="multipart/form-data">
+
+<div class="upload-box">
+    <h2 style="margin-bottom:15px;">📷 Upload Your Room</h2>
+    <p style="color:#94a3b8;margin-bottom:25px;">
+        Choose a clear room image for the best AI interior analysis.
+    </p>
+
+    <input
+        type="file"
+        id="roomImage"
+        name="roomImage"
+        accept="image/*"
+        required>
+
+    <p id="uploadStatus"
+       style="display:none;
+              color:#22c55e;
+              margin-top:20px;
+              font-weight:bold;">
+        ✅ Image uploaded successfully
+    </p>
+    <img
+        id="preview"
+        src=""
+        alt="Image Preview">
+</div>
+        <div class="room-section">
+            <h3>Select Room Type</h3>
+            <select name="roomType">
+
+                <option>Bedroom</option>
+                <option>Living Room</option>
+                <option>Kitchen</option>
+                <option>Office</option>
+                <option>Bathroom</option>
+
+            </select>
+
+        </div>
+
+        <div class="style-section">
+
+            <h3>Select Style</h3>
+
+            <select name="style">
+
+                <option>Modern</option>
+                <option>Minimalist</option>
+                <option>Luxury</option>
+                <option>Traditional</option>
+
+            </select>
+
+        </div>
+        <button type="submit" class="generate-btn">
+            ✨ Generate AI Design
+        </button>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script>
+const form=document.getElementById("uploadForm");
+form.addEventListener("submit",function(){
+    document.getElementById("loadingScreen").style.display="flex";
+    const steps=[
+        document.getElementById("step1"),
+        document.getElementById("step2"),
+        document.getElementById("step3"),
+        document.getElementById("step4"),
+        document.getElementById("step5")
+    ];
+
+    const bar=document.getElementById("progressBar");
+
+    let current=0;
+    function animate(){
+        if(current<steps.length){
+            steps[current].classList.add("active");
+            bar.style.width=((current+1)*20)+"%";
+            current++;
+            setTimeout(animate,700);
+        }
+    }
+    animate();
+});
+</script>
+</body>
+</html>

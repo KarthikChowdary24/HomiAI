@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomiAI - Design History</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+body{
+    background:#0f172a;
+    color:white;
+    padding:40px;
+}
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+h1{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:40px;
+}
+.home-btn{
+    display:inline-block;
+    margin-bottom:35px;
+    padding:14px 28px;
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
+    border-radius:12px;
+    font-weight:bold;
+}
+.card{
+    display:flex;
+    gap:25px;
+    align-items:center;
+    background:#1e293b;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:25px;
+    transition:.35s;
+    border:1px solid rgba(255,255,255,.08);
+}
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 35px rgba(0,0,0,.35);
+}
+.image-section img{
+    width:260px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+}
+.info-section{
+    flex:1;
+}
+.room-type{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+.style{
+    color:#38bdf8;
+    font-size:18px;
+    margin-bottom:12px;
+}
+.date{
+    color:#cbd5e1;
+    margin-bottom:15px;
+}
+.status{
+    display:inline-block;
+    background:#16a34a;
+    color:white;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:14px;
+    margin-bottom:20px;
+}
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+.view-btn,
+.delete-btn{
+
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
+    font-size:15px;
+    transition:.3s;
+}
+.view-btn{
+    background:#0ea5e9;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+.view-btn:hover,
+.delete-btn:hover{
+    transform:translateY(-3px);
+}
+.empty{
+    text-align:center;
+    color:#94a3b8;
+    font-size:22px;
+}
+@media(max-width:850px){
+.card{
+flex-direction:column;
+}
+.image-section img{
+width:100%;
+height:auto;
+}
+
+}
+.download-btn{
+    margin-top:10px;
+    margin-right:10px;
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.download-btn:hover{
+    opacity:.9;
+    transform:translateY(-3px);
+}
+.action-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:22px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.action-buttons a{
+    text-decoration:none;
+}
+
+.view-btn,
+.download-btn,
+.delete-btn{
+
+    width:130px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:12px;
+
+    font-size:17px;
+    font-weight:600;
+
+    color:white;
+
+    transition:.3s;
+}
+
+.view-btn{
+    background:#0ea5e9;
+}
+
+.download-btn{
+    background:#16a34a;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+
+.view-btn:hover,
+.download-btn:hover,
+.delete-btn:hover{
+    transform:translateY(-3px);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<a href="/" class="home-btn">
+🏠 Home
+</a>
+
+<h1>📜 My Design History</h1>
+{% if designs %}
+{% for design in designs %}
+<div class="card">
+<div class="image-section">
+
+<img
+src="{{ url_for('static', filename='uploads/' + design.image_name) }}"
+alt="Room">
+
+</div>
+
+<div class="info-section">
+<div class="room-type">
+{{ design.room_type }}
+</div>
+
+<div class="style">
+🎨 {{ design.style }}
+</div>
+
+<div class="date">
+📅 {{ design.created_at.strftime('%d %B %Y') }}
+</div>
+
+<div class="status">
+✅ AI Analysis Complete
+</div>
+
+<div class="action-buttons">
+
+    <a href="/design/{{ design.id }}" class="view-btn">
+        👁 View
+    </a>
+
+    <a href="/download-report/{{ design.id }}" class="download-btn">
+        📄 PDF
+    </a>
+
+    <a href="/delete/{{ design.id }}" class="delete-btn"
+       onclick="return confirm('Delete this design?')">
+        🗑 Delete
+    </a>
+
+</div>
+</div>
+</div>
+</div>
+
+{% endfor %}
+{% else %}
+<div class="empty">
+No designs found yet.
+</div>
+{% endif %}
+</div>
+</body>
+</html>

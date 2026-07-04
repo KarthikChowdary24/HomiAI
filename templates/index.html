@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomiAI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">🏠 HomiAI</div>
+ <div class="nav-links">
+    <a href="/">Home</a>
+    {% if session.get("user_id") %}
+        <span class="welcome-user">
+            👋 Welcome, {{ session["username"] }}
+        </span>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+</div>
+    </nav>
+    <section class="hero">
+        <h1>Transform Your Home With AI</h1>
+        <p>
+            Upload your room photo and get intelligent interior design
+            suggestions tailored to your style and budget.
+        </p>
+        <div class="buttons">
+            <a href="/upload">
+                <button class="primary-btn">
+                    Upload Room
+                </button>
+            </a>
+            <a href="/history">
+                <button class="secondary-btn">
+                    My Designs
+                </button>
+            </a>
+        </div>
+    </section>
+    <section class="features">
+
+        <div class="card">
+            <h3>🎨 Smart Design</h3>
+            <p>AI-generated room styling ideas.</p>
+        </div>
+
+        <div class="card">
+            <h3>🛋 Furniture Suggestions</h3>
+            <p>Find furniture that matches your room.</p>
+        </div>
+
+        <div class="card">
+            <h3>💰 Budget Planning</h3>
+            <p>Design within your preferred budget.</p>
+        </div>
+
+        <div class="card">
+            <h3>⚡ Instant Results</h3>
+            <p>Get recommendations in seconds.</p>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

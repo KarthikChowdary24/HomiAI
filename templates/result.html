@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomiAI AI Report</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .header{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .header h1{
+            font-size:40px;
+            margin-bottom:10px;
+        }
+
+        .header p{
+            color:#94a3b8;
+        }
+
+        .top-section{
+            display:flex;
+            gap:30px;
+            flex-wrap:wrap;
+            margin-bottom:35px;
+        }
+
+.image-card,
+.info-card{
+    flex:1;
+    background:rgba(30,41,59,.9);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:28px;
+    transition:.35s;
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.image-card:hover,
+.info-card:hover{
+    transform:translateY(-8px);
+}
+
+        .image-card{
+            text-align:center;
+        }
+
+        .image-card img{
+            width:100%;
+            max-width:500px;
+            border-radius:15px;
+        }
+
+        .info-card h2{
+            margin-bottom:20px;
+            color:#38bdf8;
+        }
+
+        .info-card p{
+            font-size:18px;
+            margin-bottom:15px;
+        }
+
+.badge{
+    display:inline-block;
+    padding:12px 24px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:white;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(34,197,94,.35);
+}
+
+.report-card{
+    background:rgba(30,41,59,.95);
+    border-radius:22px;
+    padding:35px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.report-card h2{
+    color:#ffffff;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+.report{
+    border-left:4px solid #38bdf8;
+    padding:5px 0 5px 20px;
+    color:#e2e8f0;
+}
+
+/* Main Heading */
+
+.report h1{
+    color:#ffffff;
+    font-size:30px;
+    margin:0 0 18px;
+    font-weight:700;
+}
+
+/* Section Headings */
+
+.report h2{
+    color:#f8fafc;
+    font-size:22px;
+    margin:18px 0 10px;
+    font-weight:600;
+}
+
+/* Small Headings */
+
+.report h3{
+    color:#cbd5e1;
+    font-size:18px;
+    margin:15px 0 8px;
+    font-weight:600;
+}
+
+/* Paragraph */
+
+.report p{
+    font-size:17px;
+    line-height:1.65;
+    margin:6px 0 12px;
+}
+
+/* Lists */
+
+.report ul,
+.report ol{
+    margin:8px 0 15px 25px;
+}
+
+.report li{
+    margin-bottom:6px;
+    line-height:1.6;
+}
+
+.report strong{
+    color:#ffffff;
+}
+
+.report hr{
+    border:1px solid #334155;
+    margin:18px 0;
+}
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+            margin-top:40px;
+        }
+
+.btn{
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
+    padding:15px 30px;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.35s;
+    box-shadow:0 8px 20px rgba(14,165,233,.3);
+}
+
+.btn:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+        .btn:hover{
+            transform:translateY(-3px);
+            opacity:.9;
+        }
+
+        .coming{
+            background:#475569;
+            cursor:not-allowed;
+        }
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(25px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.image-card,
+.info-card,
+.report-card{
+animation:fadeUp .8s ease;
+}
+
+.report h1,
+.report h2,
+.report h3{
+    color:#38bdf8;
+    margin:25px 0 15px;
+    font-weight:bold;
+}
+
+.report p{
+    margin-bottom:15px;
+    line-height:1.9;
+}
+
+.report ul{
+    margin-left:25px;
+    margin-bottom:20px;
+}
+
+.report ol{
+    margin-left:25px;
+    margin-bottom:20px;
+}
+
+.report li{
+    margin-bottom:10px;
+}
+
+.report strong{
+    color:#ffffff;
+}
+
+.report hr{
+    border:1px solid #334155;
+    margin:25px 0;
+}
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>🏠 HomiAI AI Design Report</h1>
+
+        <p>Your personalized AI interior design analysis</p>
+
+    </div>
+
+    <div class="top-section">
+
+        <div class="image-card">
+
+            <h2>Your Room</h2>
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + filename) }}"
+                alt="Uploaded Room">
+
+        </div>
+
+<div class="info-card">
+
+    <h2>Project Details</h2>
+
+    <p><strong>Room Type:</strong> {{ room_type }}</p>
+
+    <p><strong>Selected Style:</strong> {{ style }}</p>
+
+<div class="badge">
+    🤖 {{ ai_provider }}
+</div>
+
+    <p style="margin-top:15px;color:#94a3b8;">
+        Powered by <strong>{{ ai_provider }}</strong>
+    </p>
+
+</div>
+
+    </div>
+
+    <div class="report-card">
+
+        <h2>🤖 AI Interior Design Report</h2>
+
+<div class="report">
+    {{ suggestions|safe }}
+</div>
+
+    </div>
+
+<div class="buttons">
+
+    <a href="/" class="btn">
+        🏠 Home
+    </a>
+
+    <a href="/history" class="btn">
+        📜 My Designs
+    </a>
+
+    <a href="/download-report/{{ design_id }}" class="btn">
+            📄 Download PDF
+    </a>
+
+    <a href="#" class="btn coming">
+        ✨ AI Room Redesign
+    </a>
+
+</div>
+
+    </div>
+
+</div>
+<footer style="
+margin-top:70px;
+text-align:center;
+color:#94a3b8;
+">
+
+<hr style="border-color:#334155;margin-bottom:20px;">
+
+<h3>🏠 HomiAI</h3>
+
+<p>
+Built with ❤️ using Flask • Groq AI • SQLite
+</p>
+
+<p style="margin-top:10px;">
+Developed by Karthik
+</p>
+
+</footer>
+</body>
+</html>

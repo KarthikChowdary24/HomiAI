@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomiAI Design Details</title>
+
+    <style>
+
+        body{
+            background:#0f172a;
+            color:white;
+            font-family:Arial,sans-serif;
+            padding:40px;
+        }
+        .container{
+            max-width:1000px;
+            margin:auto;
+        }
+        img{
+            width:500px;
+            max-width:100%;
+            border-radius:15px;
+            margin-bottom:20px;
+        }
+        .card{
+            background:#1e293b;
+            padding:25px;
+            border-radius:15px;
+        }
+        .suggestions{
+            margin-top:20px;
+            white-space:pre-wrap;
+            line-height:1.7;
+        }
+        .back-btn{
+            display:inline-block;
+            margin-bottom:25px;
+            padding:12px 24px;
+            background:#38bdf8;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/history" class="back-btn">
+        ← Back to History
+    </a>
+    <div class="card">
+        <img src="{{ url_for('static', filename='uploads/' + design.image_name) }}"
+             alt="Room Image">
+        <h2>{{ design.room_type }}</h2>
+        <p><strong>Style:</strong> {{ design.style }}</p>
+        <p>
+            <strong>Created:</strong>
+            {{ design.created_at.strftime('%d %B %Y') }}
+        </p>
+        <div class="report">
+           {{ design.suggestions|safe }}
+        </div>
+    </div>
+</div>
+</body>
+</html>

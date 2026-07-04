@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment
+.env
+.venv/
+venv/
+
+# Database
+instance/
+*.db
+
+# Generated PDFs
+AI_Report.pdf
+*.pdf
+
+# Uploads (optional)
+static/uploads/
+
+# VS Code
+.vscode/
