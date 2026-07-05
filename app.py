@@ -72,10 +72,10 @@ groq_client = Groq(
 )
 
 # Upload Folder
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = os.path.join(app.root_path, "static", "uploads")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Home Page
 @app.route("/")
@@ -143,11 +143,8 @@ def upload():
 def upload_image():
 
     image = request.files["roomImage"]
-
     room_type = request.form["roomType"]
-
     style = request.form["style"]
-
     filename = image.filename
 
     image_path = os.path.join(
